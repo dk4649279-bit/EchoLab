@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Java 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -44,14 +44,17 @@ jobs:
       - name: Export APK
         run: |
           export ANDROID_HOME=$ANDROID_SDK_ROOT
-          ./godot --headless --export-debug "Android" "EchoLab.apk"
+          export ANDROID_SDK_ROOT=$ANDROID_HOME
+          ./godot --headless --path . --export-debug "Android" "$GITHUB_WORKSPACE/EchoLab.apk"
 
-      - name: List files
+      - name: List workspace files
         run: |
+          pwd
           ls -la
+          ls -la "$GITHUB_WORKSPACE"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: EchoLab-APK
-          path: EchoLab.apk
+          path: ${{ github.workspace }}/EchoLab.apk
