@@ -1,4 +1,4 @@
- extends Node3D
+extends Node3D
 
 func _ready():
 	print("Echo Lab - Main scene ready")
@@ -83,4 +83,4 @@ func _load_robot():
 		robot.scale = Vector3(1.0, 1.0, 1.0)
 		print("Robot loaded successfully")
 	else:
-		print("Failed to load robot from res://robot_k4000.glb")ر
+		print("Failed to load robot from res://robot_k4000.glb")
